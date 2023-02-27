@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Products List{% endblock %}
+{% block navbar %}
+<a href="{% url 'products_list' %}">E-Shop</a>
+{% endblock %}
+{% block content %}
+{% for product in products_list %}
+<div class="product_info">
+    <img src="{{ product.product_image }}" alt="">
+    <div class="product_str">
+        <p><a href="{% url 'products_list' %}">{{ product.product_name }}</a></p>
+        <div class="product_info_small_font">
+            <p>{{ product.price }} tg</p>
+            <p>{{ product.category }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
