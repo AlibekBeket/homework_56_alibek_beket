@@ -8,6 +8,11 @@
 <a href="{% url 'product_add' %}">Add Product</a>
 {% endblock %}
 {% block content %}
+<div class="form_find">
+    <form action="{% url 'products_list' %}" method="get">
+        {% include 'partials/product_find.html' with button_text="Find" %}
+    </form>
+</div>
 {% for product in products_list %}
 <div class="product_info">
     <img src="{{ product.product_image }}" alt="{{ product.product_name }} image">

@@ -2,19 +2,32 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from e_shop.models import *
 
-from e_shop.forms import ProductForm
+from e_shop.forms import *
 
 
 def products_list_view(request):
     product_category = ProductCategoryChoice.choices
     products_list = Product.objects.exclude(the_rest_of_the_goods=0).order_by('category', 'product_name')
+    form_find = ProductFindForm()
     for product in products_list:
         for category in product_category:
             if product.category == category[0]:
                 product.category = category[1]
     context = {
-        'products_list': products_list
+        'products_list': products_list,
+        'form_find': form_find
     }
+    if request.GET.get('product_find'):
+        product_category = ProductCategoryChoice.choices
+        products_list = Product.objects.filter(product_name=request.GET.get('product_find')).exclude(the_rest_of_the_goods=0).order_by('category', 'product_name')
+        for product in products_list:
+            for category in product_category:
+                if product.category == category[0]:
+                    product.category = category[1]
+        context = {
+            'products_list': products_list,
+            'form_find': form_find
+        }
     return render(request, 'products_list_page.html', context=context)
 
 

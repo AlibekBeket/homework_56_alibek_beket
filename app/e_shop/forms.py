@@ -30,3 +30,8 @@ class ProductForm(forms.ModelForm):
         if len(product_description) < 3 and len(product_description) != 0:
             raise ValidationError('Описание продукта не может состоять из 1 или 2 символов, но может быть пустым')
         return product_description
+
+
+class ProductFindForm(forms.Form):
+    product_find = forms.CharField(max_length=100, required=True, label='',
+                                   widget=forms.TextInput(attrs={'placeholder': 'Input name'}))
