@@ -9,7 +9,12 @@
 <body>
 <nav class="navbar">
     <div class="container">
-        <ul class="menu">
+        <ul class="menu logo">
+            <li>
+                {% block navbar_logo %}{% endblock %}
+            </li>
+        </ul>
+        <ul class="menu link">
             <li>
                 {% block navbar %}{% endblock %}
             </li>
