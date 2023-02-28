@@ -4,8 +4,9 @@
 <a href="{% url 'products_list' %}">E-Shop</a>
 {% endblock %}
 {% block navbar %}
+<a href="{% url 'products_list' %}">Product List</a>
 <a href="{% url 'product_add' %}">Add Product</a>
-<a href="{% url 'products_list' %}">Update Product</a>
+<a href="{% url 'product_update' product.pk %}">Update Product</a>
 <a href="{% url 'products_list' %}">Delete Product</a>
 {% endblock %}
 {% block content %}
