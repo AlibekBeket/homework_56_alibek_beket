@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from e_shop.models import *
 
+from e_shop.forms import ProductForm
+
 
 def products_list_view(request):
     product_category = ProductCategoryChoice.choices
@@ -26,3 +28,21 @@ def product_detail_view(request, pk):
         'product': product_info
     }
     return render(request, 'product_detail_page.html', context=context)
+
+
+def product_add_view(request):
+    if not request.POST:
+        form = ProductForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'product_add_page.html', context=context)
+    form = ProductForm(data=request.POST)
+    if not form.is_valid():
+        context = {
+            'form': form
+        }
+        return render(request, 'product_add_page.html', context=context)
+    else:
+        product = Product.objects.create(**form.cleaned_data)
+        return redirect('product_detail', pk=product.pk)
