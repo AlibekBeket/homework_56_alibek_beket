@@ -19,7 +19,8 @@ def products_list_view(request):
     }
     if request.GET.get('product_find'):
         product_category = ProductCategoryChoice.choices
-        products_list = Product.objects.filter(product_name=request.GET.get('product_find')).exclude(the_rest_of_the_goods=0).order_by('category', 'product_name')
+        products_list = Product.objects.filter(product_name=request.GET.get('product_find')).exclude(
+            the_rest_of_the_goods=0).order_by('category', 'product_name')
         for product in products_list:
             for category in product_category:
                 if product.category == category[0]:
